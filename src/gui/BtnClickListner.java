@@ -11,22 +11,28 @@ import javax.swing.JTextField;
 public class BtnClickListner implements ActionListener {
 
 	JLabel label;
-	String value;
+	String key;
+	String express= "";
+	Express exp = new Express();
 
 	public BtnClickListner() {
 		super();
 	}
 
-	BtnClickListner(String value, JLabel label) {
+	BtnClickListner(String key, JLabel label) {
 		this.label = label;
-		this.value = value;
+		this.key = key;
 	}
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("input v : " + value);
-		label.setText(value);
+		
+		express= exp.appendExpress(key);
+		System.out.println("key : " + key);
+		System.out.println("express : " + express);
+		
+		label.setText(express);
 	}
 	
 }
+

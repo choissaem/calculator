@@ -17,78 +17,87 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class createUI {
+public class Calculator {
 
-	public void setInit(){
+	final String digitBtnTitle[] = { "7", "8", "9", "4", "5", "6", "1", "2", "3", "±", "0", "." };
+	final String operBtnTitle[] = {"+","-","*","/"};
+	
+	JFrame frame;
+	Container contentPane;
+	JLabel label; 
+	JTextField text; 
+	JButton btnConfirm; 
+	Map<String, JButton> btnMap = new HashMap<String, JButton>();
+	JPanel digitPanel = new JPanel();
+	JPanel operPanel = new JPanel();
+	
+	public void run(){
 		
-		JFrame frame = new JFrame("자바 다항 계산기");
-		Container contentPane = frame.getContentPane();
+		setFrame();
+		setLayoutTop();
+		setDigitPanel();
+		setOperPanel();
+		setPanel();
+		connectLisnter();
+		frameCloseSet();
+	}
 
-		JLabel label = new JLabel("계산 결과", SwingConstants.CENTER);
-		JTextField text = new JTextField();
-		JButton button = new JButton("확인");
-
-		frame.setLocation(600, 400);
-		frame.setPreferredSize(new Dimension(300, 200));
-
-		contentPane.add(label, BorderLayout.NORTH);
-		contentPane.add(text, BorderLayout.CENTER);
-		contentPane.add(button, BorderLayout.EAST);
-
-		GridLayout digitGrid = new GridLayout(4, 3);
-		JPanel digitPanel = new JPanel();
-		digitPanel.setLayout(digitGrid);
-		
-		
-		Map<String, JButton> btnMap = new HashMap<String, JButton>();
-		
-		final String digitBtnTitle[] = { "7", "8", "9", "4", "5", "6", "1", "2", "3", "±", "0", "." };
-
-		createBtn(digitPanel, btnMap, digitBtnTitle);
-
-		GridLayout operGrid = new GridLayout(4, 1);
-		JPanel operPanel = new JPanel();
-		operPanel.setLayout(operGrid);
-		
-		final String operBtnTitle[] = {"+","-","*","/"};
-		createBtn(operPanel, btnMap, operBtnTitle);
-
-		JPanel p = new JPanel();
-		p.add(digitPanel, BorderLayout.WEST);
-		p.add(operPanel, BorderLayout.EAST);
-		contentPane.add(p, BorderLayout.SOUTH);
-
-		ActionListener listner = new ConfirmButtonActionListner(text, label);
-//		ActionListener btnClicklistner = new BtnClickListner();
-		ActionListener btnClicklistner;
-		
-		Iterator<String> valueIterator = btnMap.keySet().iterator();
-		
-		ArrayList<ActionListener> btnClickListnerList = new ArrayList<ActionListener>(); 
-		
-		while(valueIterator.hasNext()){
-			String key = valueIterator.next();
-			btnClicklistner = new BtnClickListner(key, label);
-			btnMap.get(key).addActionListener(btnClicklistner);
-//			addActionListener(btnClickListnerList.get(i));
-//			btnClicklistner = new BtnClickListner(btnMap, value, label);
-//			btnClicklistner = new BtnClickListner();
-		}
-		
-		button.addActionListener(listner);
-		
-//		for(int i=0; i<btnClickListnerList.size(); i++){
-//			for(String s:digitBtnTitle){
-//				btnMap.get(s).addActionListener(btnClickListnerList.get(i));
-//			}
-//		}
-		
+	private void frameCloseSet() {
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
+
+	private void connectLisnter() {
+		ActionListener listner = new ConfirmButtonActionListner(text, label);
+		btnConfirm.addActionListener(listner);
+
+		ActionListener btnClicklistner;
+		Iterator<String> iterator = btnMap.keySet().iterator();
+		while(iterator.hasNext()){
+			String key = iterator.next();
+			btnClicklistner = new BtnClickListner(key, label);
+			btnMap.get(key).addActionListener(btnClicklistner);
+		}
+	}
+
+	private void setPanel() {
+		JPanel p = new JPanel();
+		p.add(digitPanel, BorderLayout.WEST);
+		p.add(operPanel, BorderLayout.EAST);
+		contentPane.add(p, BorderLayout.SOUTH);
+	}
+
+	private void setFrame() {
+		frame = new JFrame("자바 다항 계산기");
+		label = new JLabel("계산 결과", SwingConstants.CENTER);
+		text = new JTextField();
+		btnConfirm = new JButton("=");
+
+		frame.setLocation(600, 400);
+		frame.setPreferredSize(new Dimension(300, 200));
+	}
+
+	private void setOperPanel() {
+		GridLayout operGrid = new GridLayout(4, 1);
+		operPanel.setLayout(operGrid);
+		createBtn(operPanel, btnMap, operBtnTitle);
+	}
+
+	private void setDigitPanel() {
+		GridLayout digitGrid = new GridLayout(4, 3);
+		digitPanel.setLayout(digitGrid);
+		createBtn(digitPanel, btnMap, digitBtnTitle);
+	}
+
+	private void setLayoutTop() {
+		contentPane = frame.getContentPane();
+		contentPane.add(label, BorderLayout.NORTH);
+		contentPane.add(text, BorderLayout.CENTER);
+		contentPane.add(btnConfirm, BorderLayout.EAST);
+	}
 	
-	private static void createBtn(JPanel panel, Map<String, JButton> btnMap, String[] btnTitle) {
+	private void createBtn(JPanel panel, Map<String, JButton> btnMap, String[] btnTitle) {
 
 		int btnLength = btnTitle.length;
 		JButton[] btns = new JButton[btnLength];

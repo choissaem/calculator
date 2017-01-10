@@ -4,13 +4,7 @@ public class RunCalc {
 
 	public static void main(String[] args) {
 
-		createUI ui = new createUI();
-		
-		ui.setInit();
-		
-		
+		Calculator calc = new Calculator();
+		calc.run();
 	}
-
-
-
 }

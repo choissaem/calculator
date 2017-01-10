@@ -2,26 +2,15 @@ package cli;
 
 import java.util.ArrayList;
 
-public class calc {
+public class CalcEngine {
 
-	static ArrayList<String> operation = new ArrayList<String>();
-	static ArrayList<Double> digits = new ArrayList<Double>();
+	ArrayList<String> operation;
+	ArrayList<Double> digits;
 	Character c;
-
-	public static void main(String[] args) {
-
-		System.out.println("식을 입력하세요");
-		// Scanner input = new Scanner(System.in);
-		// String s = input.nextLine();
-		String s = "10+23*3-2+5";
-		// System.out.println(s);
-		setup(s);
-
-		System.out.println(s);
-		proceed();
-	}
-
-	public static void proceed() {
+	String express = "";
+	
+	public String proceed() {
+		
 		int i = 0;
 		while (i < operation.size()) {
 
@@ -55,10 +44,15 @@ public class calc {
 			}
 		}
 
-		System.out.println("= " + digits.get(0));
+		express = digits.get(0).toString();
+//		System.out.println("= " + digits.get(0));
+		return express;
 	}
 
-	public static double setup(String source) {
+	public double setup(String source) {
+		
+		operation = new ArrayList<String>();
+		digits = new ArrayList<Double>();
 
 		for (int i = 0; i < source.length(); i++) {
 			Character c = source.charAt(i);
@@ -84,7 +78,7 @@ public class calc {
 		return 0;
 	}
 
-	public static double oper(Double a, Double b, String o) {
+	public double oper(Double a, Double b, String o) {
 
 		Double result = 0.0;
 
