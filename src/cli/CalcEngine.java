@@ -15,17 +15,21 @@ public class CalcEngine {
 		while (i < operation.size()) {
 
 			switch (operation.get(i)) {
+			
 			case "*":
 			case "/":
 				Double r = oper(digits.get(i), digits.get(i + 1), operation.get(i));
 				operation.remove(i);
 				digits.remove(i);
 				digits.set(i, r);
-				System.out.println(digits.toString());
+				i=0;
+				
 				System.out.println(operation.toString());
+				System.out.println(digits.toString());
 				break;
 			}
 			i++;
+			
 		}
 
 		i = 0;
@@ -38,8 +42,8 @@ public class CalcEngine {
 				operation.remove(i);
 				digits.remove(i);
 				digits.set(i, r);
-				System.out.println(digits.toString());
 				System.out.println(operation.toString());
+				System.out.println(digits.toString());
 				break;
 			}
 		}
