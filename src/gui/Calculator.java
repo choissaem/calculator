@@ -56,7 +56,7 @@ public class Calculator {
 		Iterator<String> iterator = btnMap.keySet().iterator();
 		while(iterator.hasNext()){
 			String key = iterator.next();
-			btnClicklistner = new BtnClickListner(key, label);
+			btnClicklistner = new BtnClickListner(key, label, text);
 			btnMap.get(key).addActionListener(btnClicklistner);
 		}
 	}
@@ -75,17 +75,17 @@ public class Calculator {
 		btnConfirm = new JButton("=");
 
 		frame.setLocation(600, 400);
-		frame.setPreferredSize(new Dimension(300, 200));
+		frame.setPreferredSize(new Dimension(250, 230));
 	}
 
 	private void setOperPanel() {
-		GridLayout operGrid = new GridLayout(4, 1);
+		GridLayout operGrid = new GridLayout(5, 1);
 		operPanel.setLayout(operGrid);
 		createBtn(operPanel, btnMap, operBtnTitle);
 	}
 
 	private void setDigitPanel() {
-		GridLayout digitGrid = new GridLayout(4, 3);
+		GridLayout digitGrid = new GridLayout(5, 3);
 		digitPanel.setLayout(digitGrid);
 		createBtn(digitPanel, btnMap, digitBtnTitle);
 	}

@@ -2,10 +2,13 @@ package gui;
 
 public class Express {
 	
-	static StringBuilder express = new StringBuilder("");
+	StringBuilder express = new StringBuilder("");
 	String token;
 
-	public String appendExpress(String token){
+	public String appendExpress(String exp, String token){
+		
+		express.append(exp);
+		
 		return express.append(token).toString();
 	}
 

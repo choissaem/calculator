@@ -12,7 +12,6 @@ class ConfirmButtonActionListner implements ActionListener{
 
 	JTextField text;
 	JLabel label;
-	CalcEngine ce;
 	
 	ConfirmButtonActionListner(JTextField text, JLabel label) {
 		this.text = text;
@@ -22,10 +21,11 @@ class ConfirmButtonActionListner implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		String express = label.getText(); 
-		System.out.println(express);
-		ce  = new CalcEngine();
+		String express = text.getText();
+
+		CalcEngine ce = new CalcEngine();
 		express = ce.proceed(express);
+
 		label.setText("계산 결과 : " + express);
 	}
 	

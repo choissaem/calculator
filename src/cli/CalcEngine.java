@@ -78,7 +78,8 @@ public class CalcEngine {
 		}
 
 		String[] digit = express.split("(\\+|-|\\*|/)");
-
+		
+		
 		for (String s : digit) {
 			digits.add(Double.valueOf(s));
 		}
