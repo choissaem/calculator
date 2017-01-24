@@ -9,7 +9,11 @@ public class CalcEngine {
 	Character c;
 	String express = "";
 	
-	public String proceed() {
+	public String proceed(String s) {
+		
+		setup(s);
+		
+		express = s;
 		
 		int i = 0;
 		while (i < operation.size()) {
@@ -55,11 +59,14 @@ public class CalcEngine {
 
 	public double setup(String source) {
 		
+		Bracket br = new Bracket();
+		express = br.proceedBrakcet(source);
+		
 		operation = new ArrayList<String>();
 		digits = new ArrayList<Double>();
 
-		for (int i = 0; i < source.length(); i++) {
-			Character c = source.charAt(i);
+		for (int i = 0; i < express.length(); i++) {
+			Character c = express.charAt(i);
 			switch (c) {
 			case '+':
 			case '-':
@@ -70,7 +77,7 @@ public class CalcEngine {
 			}
 		}
 
-		String[] digit = source.split("(\\+|-|\\*|/)");
+		String[] digit = express.split("(\\+|-|\\*|/)");
 
 		for (String s : digit) {
 			digits.add(Double.valueOf(s));
@@ -103,5 +110,6 @@ public class CalcEngine {
 
 		return result;
 	}
+
 
 }

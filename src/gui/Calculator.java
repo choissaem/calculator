@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 
 public class Calculator {
 
-	final String digitBtnTitle[] = { "7", "8", "9", "4", "5", "6", "1", "2", "3", "±", "0", "." };
+	final String digitBtnTitle[] = { "7", "8", "9", "4", "5", "6", "1", "2", "3", "±", "0", ".", "(", ")"};
 	final String operBtnTitle[] = {"+","-","*","/"};
 	
 	JFrame frame;

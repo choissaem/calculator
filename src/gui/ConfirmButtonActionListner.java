@@ -23,10 +23,9 @@ class ConfirmButtonActionListner implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		String express = label.getText(); 
-		
+		System.out.println(express);
 		ce  = new CalcEngine();
-		ce.setup(express);
-		express = ce.proceed();
+		express = ce.proceed(express);
 		label.setText("계산 결과 : " + express);
 	}
 	
